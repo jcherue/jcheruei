@@ -1,0 +1,112 @@
+/* ===== J CHERUEI - DESIGN FILE =====
+   Change colors here once and the whole site updates. */
+:root{
+  --black:#060606;
+  --panel:#111010;
+  --line:#2a2417;
+  --gold:#d4af37;
+  --gold-light:#f4dc8f;
+  --gold-deep:#9a7a1c;
+  --text:#f3eddc;
+  --muted:#b3aa93;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--black);color:var(--text);font:18px/1.7 var(--sans);-webkit-text-size-adjust:100%}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--gold-light)}
+:focus-visible{outline:3px solid var(--gold-light);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--gold);color:#000;padding:10px 14px;z-index:100}
+.skip:focus{left:8px}
+
+/* ----- top bar ----- */
+.bar{position:sticky;top:0;z-index:50;background:rgba(6,6,6,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:18px;height:62px}
+.bar img{width:44px;height:44px;border-radius:50%}
+.bar nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+.bar nav::-webkit-scrollbar{display:none}
+.bar nav a{color:var(--text);text-decoration:none;padding:10px 12px;font-size:.95rem;white-space:nowrap;border-radius:6px}
+.bar nav a:hover{color:var(--gold-light)}
+
+/* ----- shared ----- */
+section{padding:84px 0;border-top:1px solid var(--line)}
+h1,h2,h3{font-family:var(--serif);line-height:1.1;margin:0}
+h2{font-size:clamp(2rem,6vw,3rem);margin-bottom:20px;color:var(--gold);
+  background:linear-gradient(180deg,var(--gold-light),var(--gold) 60%,var(--gold-deep));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+p{margin:0 0 16px;max-width:64ch}
+.lead{font-size:1.15rem;color:var(--muted)}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 24px;border-radius:999px;
+  border:1.5px solid var(--gold);color:var(--gold-light);text-decoration:none;font-weight:700;background:transparent;cursor:pointer;font-size:1rem;font-family:var(--sans)}
+.btn:hover{background:rgba(212,175,55,.14)}
+.btn.gold{background:linear-gradient(180deg,var(--gold-light),var(--gold));color:#111;border-color:var(--gold)}
+.btn.gold:hover{filter:brightness(1.08)}
+
+/* ----- home ----- */
+.hero{border:0;padding:56px 0 72px;background:radial-gradient(ellipse at 70% 40%,rgba(212,175,55,.16),transparent 62%)}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+.hero .logo{width:min(440px,100%);margin:0 0 8px -8px}
+.hero h1{font-size:clamp(2.6rem,8vw,4.6rem);color:var(--text);margin-bottom:6px}
+.slogan{font-family:var(--serif);font-style:italic;font-size:clamp(1.25rem,4vw,1.7rem);color:var(--gold-light);margin:0 0 18px}
+.hero .photo{justify-self:center;width:min(420px,100%);filter:drop-shadow(0 0 28px rgba(212,175,55,.28))}
+.hero .photo{-webkit-mask-image:linear-gradient(to bottom,#000 82%,transparent);mask-image:linear-gradient(to bottom,#000 82%,transparent)}
+.fade{animation:fade .9s ease-out both}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ----- music ----- */
+.song{display:grid;grid-template-columns:200px 1fr;gap:26px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:18px}
+.song .art{width:200px;height:200px;object-fit:cover;border-radius:10px;background:#000;border:1px solid var(--line)}
+.song h3{font-size:2rem;margin-bottom:4px}
+.song .meta{color:var(--muted);margin:0 0 16px}
+.play{width:64px;height:64px;border-radius:50%;padding:0;background:linear-gradient(180deg,var(--gold-light),var(--gold));border:0;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 0 0 6px rgba(212,175,55,.18)}
+.btn.play,.btn.play:hover{background:linear-gradient(180deg,var(--gold-light),var(--gold))}
+.btn.play:hover{filter:brightness(1.1)}
+.play svg{width:26px;height:26px;fill:#111;margin-left:4px}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.player{margin-top:16px;grid-column:1/-1}
+.player[hidden]{display:none}
+.player iframe{width:100%;height:220px;border:0;border-radius:10px;background:#000}
+.featured{margin-top:30px;color:var(--muted)}
+
+/* ----- videos ----- */
+.videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.video{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.video iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
+.video .body{padding:18px}
+.video h3{font-size:1.3rem;margin-bottom:8px}
+
+/* ----- follow ----- */
+.social{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:12px}
+
+/* ----- booking ----- */
+.types{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;list-style:none;padding:0;margin:22px 0 26px}
+.types li{border:1px solid var(--line);border-left:3px solid var(--gold);padding:14px 16px;border-radius:8px;background:var(--panel)}
+.form{width:100%;height:960px;border:1px solid var(--line);border-radius:12px;background:var(--panel);margin-top:26px}
+
+/* ----- footer ----- */
+footer{border-top:1px solid var(--line);padding:48px 0;background:#000;text-align:center;color:var(--muted)}
+footer img{margin:0 auto 12px;border-radius:50%}
+footer .name{font-family:var(--serif);font-size:1.5rem;color:var(--gold-light);margin:0}
+footer .slogan{margin:4px 0 18px;font-size:1.1rem}
+footer .social{justify-content:center;margin-bottom:22px}
+footer p{margin:0 auto 10px;font-size:.95rem}
+
+@media(max-width:760px){
+  body{font-size:17px}
+  section{padding:64px 0}
+  .hero .wrap{grid-template-columns:1fr}
+  .hero .photo{order:-1;width:min(300px,80%)}
+  .hero .logo{margin:0 auto 10px}
+  .hero .text{text-align:center}
+  .hero p{margin-left:auto;margin-right:auto}
+  .btns{justify-content:center}
+  .song{grid-template-columns:1fr;text-align:center}
+  .song .art{width:min(260px,100%);height:auto;aspect-ratio:1;margin:0 auto}
+  .row{justify-content:center}
+  .form{height:1100px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.fade{animation:none}}
