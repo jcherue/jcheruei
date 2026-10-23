@@ -110,3 +110,7 @@ footer p{margin:0 auto 10px;font-size:.95rem}
   .form{height:1100px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.fade{animation:none}}
+/* Floating WhatsApp button */
+.wa{position:fixed;right:18px;bottom:18px;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.5);z-index:60}
+.wa:hover{filter:brightness(1.1)}
+.wa svg{width:34px;height:34px;fill:#fff}
