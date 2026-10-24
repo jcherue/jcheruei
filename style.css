@@ -134,3 +134,6 @@ footer p{margin:0 auto 10px;font-size:.95rem}
 .video .date{color:var(--muted);font-size:.9rem;margin:0 0 8px}
 .video .body p{color:var(--muted)}
 @media(prefers-reduced-motion:reduce){.video .vthumb img{transition:none}}
+
+/* Framed hero photo */
+.hero .photo{-webkit-mask-image:none;mask-image:none;filter:none;border-radius:14px;border:1px solid var(--gold-deep);box-shadow:0 0 40px rgba(212,175,55,.22)}
