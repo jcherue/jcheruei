@@ -138,24 +138,15 @@
   <div class="wrap">
     <h2>Videos</h2>
     <p class="lead">Gospel rap performances, freestyles, testimonies, and short clips on YouTube.</p>
-    <div class="videos">
-
-      <div class="video">
+    <!-- Video cards appear here automatically from the file videos.json -->
+    <div class="videos" id="video-list">
+      <div class="video channel">
         <div class="body">
           <h3>J Cheruei on YouTube</h3>
           <p>Subscribe to get new freestyles and videos when they’re posted.</p>
           <a class="btn gold" href="https://www.youtube.com/@jesusmuzic.rap1" target="_blank" rel="noopener">Visit my channel</a>
         </div>
       </div>
-
-      <!--
-        ADD A VIDEO: copy the whole block below, paste it above this comment, and replace VIDEO_ID
-        with the code from your YouTube link (the letters after v= or after youtu.be/).
-      <div class="video">
-        <iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID" title="Video title" loading="lazy" allowfullscreen></iframe>
-        <div class="body"><h3>Video title</h3></div>
-      </div>
-      -->
     </div>
   </div>
 </section>
@@ -240,6 +231,73 @@ document.querySelectorAll('audio[data-tag]').forEach(function (a) {
   });
 });
  </script>
+
+ <!-- ============ VIDEO GALLERY SCRIPT ============ -->
+<script>
+(function () {
+  var list = document.getElementById('video-list');
+  if (!list) return;
+  var channel = list.querySelector('.channel');
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text) n.textContent = text;
+    return n;
+  }
+
+  fetch('videos.json').then(function (r) {
+    if (!r.ok) throw new Error('no file');
+    return r.json();
+  }).then(function (items) {
+    items.forEach(function (v) {
+      if (!v || !/^[\w-]{11}$/.test(v.id)) return;
+      var isShort = v.format === 'short';
+      var card = el('article', 'video' + (isShort ? ' short' : ''));
+
+      var btn = el('button', 'vthumb');
+      btn.type = 'button';
+      btn.setAttribute('aria-label', 'Play video: ' + v.title);
+      btn.dataset.id = v.id;
+      var img = el('img');
+      img.src = 'https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg';
+      img.alt = '';
+      img.width = 480; img.height = 360; img.loading = 'lazy';
+      var play = el('span', 'vplay');
+      play.setAttribute('aria-hidden', 'true');
+      play.innerHTML = '<svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg>';
+      btn.appendChild(img); btn.appendChild(play);
+
+      var body = el('div', 'body');
+      if (v.category) body.appendChild(el('span', 'tag', v.category));
+      body.appendChild(el('h3', '', v.title));
+      if (v.date) {
+        var d = new Date(v.date + 'T12:00:00Z');
+        if (!isNaN(d)) body.appendChild(el('p', 'date', d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })));
+      }
+      if (v.description) body.appendChild(el('p', '', v.description));
+      var a = el('a', 'btn', 'Watch on YouTube');
+      a.href = 'https://www.youtube.com/' + (isShort ? 'shorts/' : 'watch?v=') + v.id;
+      a.target = '_blank'; a.rel = 'noopener';
+      body.appendChild(a);
+
+      card.appendChild(btn); card.appendChild(body);
+      list.insertBefore(card, channel);
+    });
+  }).catch(function () {});
+
+  list.addEventListener('click', function (e) {
+    var b = e.target.closest('.vthumb');
+    if (!b) return;
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.id + '?autoplay=1&rel=0&playsinline=1';
+    f.title = b.getAttribute('aria-label').replace('Play video: ', '');
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.allowFullscreen = true;
+    b.replaceWith(f);
+  });
+})();
+</script>
  
 <!-- ============ PLAY BUTTON SCRIPT ============ -->
 <script>
