@@ -115,3 +115,9 @@ footer p{margin:0 auto 10px;font-size:.95rem}
 .wa:hover{filter:brightness(1.1)}
 .wa svg{width:34px;height:34px;fill:#fff}
 .player audio{width:100%}
+
+/* About story */
+.story-block{margin:0 0 44px;max-width:68ch}
+.story-block h3{font-size:clamp(1.5rem,4.5vw,2rem);color:var(--gold-light);margin-bottom:16px;padding-left:14px;border-left:3px solid var(--gold)}
+.story-block p{line-height:1.85}
+.story .closing{font-family:var(--serif);font-style:italic;font-size:1.3rem;color:var(--gold-light);margin-top:24px}
