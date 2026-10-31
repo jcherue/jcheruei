@@ -298,23 +298,6 @@ document.querySelectorAll('audio[data-tag]').forEach(function (a) {
   });
 })();
 </script>
-
-<script>
-document.querySelectorAll('audio[data-tag]').forEach(function (a) {
-  var song = a.getAttribute('src'), tag = a.dataset.tag, state = 'idle';
-  a.addEventListener('play', function () {
-    if (state !== 'idle') return;
-    state = 'tag'; a.src = tag; a.play().catch(function () {});
-  });
-  a.addEventListener('error', function () {
-    if (state === 'tag') { state = 'song'; a.src = song; a.play().catch(function () {}); }
-  });
-  a.addEventListener('ended', function () {
-    if (state === 'tag') { state = 'song'; a.src = song; a.play().catch(function () {}); }
-    else if (state === 'song') { state = 'idle'; a.src = song; }
-  });
-});
-</script>
  
 <!-- ============ PLAY BUTTON SCRIPT ============ -->
 <script>
